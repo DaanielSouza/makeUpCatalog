@@ -180,15 +180,30 @@ function filtrar(){
   let ordenar = document.getElementById("sort-type").value;
 
   if(marca.value != ""){
-    resultado = resultado.filter(item => item.brand == marca.value);
+    resultado = resultado.filter(item => {
+      if(item.brand != null){
+        return item.brand.toUpperCase().trim() == marca.value.toUpperCase().trim()
+      }
+    return false;
+    });
   }
 
   if(nome.value != ""){
-    resultado = resultado.filter(item => item.name == nome.value);
+    resultado = resultado.filter(item => {
+      if(item.name != null){
+        return item.name.toUpperCase().trim() == nome.value.toUpperCase().trim()
+      }
+      return false;
+    });
   }
 
   if(tipo.value != ""){
-    resultado = resultado.filter(item => item.product_type == tipo.value);
+    resultado = resultado.filter(item => {
+      if(item.product_type != null){
+        return item.product_type.toUpperCase().trim() == tipo.value.toUpperCase().trim()
+      }
+      return false;
+    });
   }
 
   if(resultado.length == 0){
@@ -226,7 +241,7 @@ function carregaDados(result){
     arrayFim[i].rating = retornaZeroSeNulo(arrayFim[i].rating);
     arrayFim[i].price = retornaZeroSeNulo(arrayFim[i].price);
     arrayFim[i].name = arrayFim[i].name.trim()
-    
+
     marcas.add(arrayFim[i].brand);
     nomes.add(arrayFim[i].name);
     tipos.add(arrayFim[i].product_type);
